@@ -50,7 +50,9 @@ export default {
   flex-direction: column;
   min-height: 100vh;
 }
-
+.container{
+  padding-bottom: 80px;
+}
 
 .content {
   flex: 1;
