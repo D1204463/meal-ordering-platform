@@ -8,55 +8,37 @@
 
     <!-- Card layout for menu items -->
     <div class="menu-grid">
-      <div v-for="item in menuItems" :key="item.id" class="menu-card">
-        <h2>{{ item.name }}</h2>
-        <p>{{ item.description }}</p>
+      <div v-for="item in menuItems" :key="item.item" class="menu-card">
+        <h2>{{ item.item }}</h2>
         <p>Price: {{ item.price }}</p>
         <button @click="addToCart(item)">Add to Cart</button>
       </div>
     </div>
 
-    <!-- Cart button -->
-    <router-link to="/cart">
-      <button class="cart-button">Cart</button>
-    </router-link>
-    <Footer :isFixed="true" />
-    <!-- List of items currently in the cart -->
-    <div class="cart-list">
-      <h2>Items in Cart</h2>
-      <ul>
-        <li v-for="item in cartItems" :key="item.id">
-          {{ item.name }} - Quantity: {{ item.quantity }}
-        </li>
-      </ul>
-    </div>
+
   </div>
 </template>
 
 <script>
-import axios from 'axios';
 import cartService from '@/services/cartService';
+import { menu_data } from '@/fake_data/data.js';
 
 export default {
   name: 'MenuPage',
   data() {
     return {
-      menuItems: [],
-      cartItems: []
+      menuItems:[],
+     
     };
   },
   created() {
     this.fetchMenuItems();
-    this.fetchCartItems();
   },
   methods: {
     async fetchMenuItems() {
-      try {
-        const response = await axios.get('http://localhost:5000/api/menu_items');
-        this.menuItems = response.data;
-      } catch (error) {
-        console.error('Failed to fetch menu items:', error);
-      }
+      const menu_id = this.$route.params.id;
+      const data = menu_data[menu_id]['menu'];
+      this.menuItems = data;
     },
     fetchCartItems() {
       this.cartItems = cartService.getCartItems();
