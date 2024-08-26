@@ -85,13 +85,13 @@ export default {
       }
     },
     initMap() {
-      this.map = L.map('map').setView([37.7749, -122.4194], 12);
+      this.map = L.map('map').setView([24.17956, 120.64671], 12);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
       }).addTo(this.map);
 
-      L.marker([37.7749, -122.4194]).addTo(this.map)
+      L.marker([24.17956, 120.64671]).addTo(this.map)
           .bindPopup('Your Location')
           .openPopup();
     },
