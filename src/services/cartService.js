@@ -1,25 +1,28 @@
 // src/services/cartService.js
-export default {
-    cartItems: [],
 
+const CART_KEY = 'cartItems';
+
+function getStoredCart() {
+    const cart = localStorage.getItem(CART_KEY);
+    return cart ? JSON.parse(cart) : [];
+}
+
+function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
+
+export default {
+    getCartItems() {
+        return getStoredCart();
+    },
     addToCart(item) {
-        const existingItem = this.cartItems.find(cartItem => cartItem.id === item.id);
+        const cartItems = getStoredCart();
+        const existingItem = cartItems.find(cartItem => cartItem.item === item.item);
         if (existingItem) {
             existingItem.quantity += item.quantity;
         } else {
-            this.cartItems.push(item);
+            cartItems.push(item);
         }
-    },
-
-    removeFromCart(itemId) {
-        this.cartItems = this.cartItems.filter(item => item.id !== itemId);
-    },
-
-    getCartItems() {
-        return this.cartItems;
-    },
-
-    calculateTotal() {
-        return this.cartItems.reduce((total, item) => total + (parseFloat(item.price.replace('$', '')) * item.quantity), 0);
+        saveCart(cartItems);
     }
 };
