@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/">
-        <img src="/img/logo.webp" alt="Logo" class="logo">
+        <img src="@/assets/logo.jpg" alt="Logo" class="logo">
       </router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -102,13 +102,49 @@ export default {
 .logo {
   width: 80px;
 }
+
 .navbar-content-A {
   width: 50%;
 }
+
 .navbar-content-B {
   width: 50%;
 }
+
 .navbar-text {
-  margin-right: 1rem;
+  margin-right: 1rem; /* 可根据需要调整间距 */
+}
+
+.navbar.navbar-expand-lg {
+  background-color: #f8650b !important; /* 沙棕色，模擬木材的顏色 */
+}
+
+.btn {
+  background-color: #ffc55d; /* 象牙白 */
+
+  color: #210b2c; /* 字體顏色設為黑色 */
+}
+
+.btn:hover {
+  background-color: 8d99ae; /* 浅灰色作為懸停效果 */
+  border-color: #EAEAEA;
+  color: #000;
+}
+.user-actions .btn {
+  color: #210b2c; /* 按鈕文字顏色 */
+  text-decoration: none; /* 移除底線 */
+}
+
+.user-actions .btn:hover {
+  color: #000; /* 懸停時文字顏色 */
+}
+/* 移除 router-link 的藍色底線 */
+.navbar-content-A .nav-link {
+  color: #210b2c; /* 文字顏色 */
+  text-decoration: none; /* 移除底線 */
+}
+
+.navbar-content-A .nav-link:hover {
+  color: #000; /* 懸停時文字顏色 */
 }
 </style>
