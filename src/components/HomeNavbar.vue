@@ -14,16 +14,6 @@
               <span class="nav-link active" aria-current="page">RestaurantPage</span>
             </li>
           </router-link>
-          <router-link to="/menu" v-slot="{ navigate }">
-            <li class="nav-item" @click="navigate">
-              <span class="nav-link">Menu</span>
-            </li>
-          </router-link>
-          <router-link to="/order-history" v-slot="{ navigate }">
-            <li class="nav-item" @click="navigate">
-              <span class="nav-link">OrderHistory</span>
-            </li>
-          </router-link>
           <router-link to="/delivery-status" v-slot="{ navigate }">
             <li class="nav-item" @click="navigate">
               <span class="nav-link">DeliveryStatusPage</span>
@@ -32,38 +22,71 @@
         </ul>
         <div class="navbar-content-A">
           <div class="d-flex">
-            <div class="location me-3">
-              <span>位置 {{ location }}</span>
-              <button class="btn btn-outline-secondary ms-2">更改位置</button>
-            </div>
+            <button class="btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#addressModal">
+              位置 {{ location }}
+            </button>
             <span class="navbar-text ms-auto">
-              Guest
+              {{ userName || 'Guest' }}
             </span>
             <div class="user-actions">
-              <button class="btn btn-outline-primary me-2">
+              <button class="btn btn-outline-primary me-2" v-if="!isLoggedIn">
                 <router-link to="/login">登入</router-link>
               </button>
-              <button class="btn btn-outline-secondary me-2">
+              <button class="btn btn-outline-secondary me-2" v-if="!isLoggedIn">
                 <router-link to="/register">註冊</router-link>
               </button>
-              <button class="btn btn-outline-success">
+              <button class="btn btn-outline-success" v-if="isLoggedIn">
                 <router-link to="/cart">購物車</router-link>
+              </button>
+              <button class="btn btn-outline-danger" v-if="isLoggedIn" @click="logout">
+                登出
               </button>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <AddressModal @address-submitted="updateLocation" />
   </nav>
 </template>
 
 <script>
+import AddressModal from './AddressModal.vue';
+
 export default {
   name: 'NavBar',
+  components: {
+    AddressModal
+  },
   data() {
     return {
-      location: '當前位置'
+      location: '當前位置',
+      userName: '',
+      isLoggedIn: false
     };
+  },
+  methods: {
+    updateLocation(newAddress) {
+      this.location = newAddress;
+    },
+    logout() {
+      // Implement logout logic here
+      this.userName = '';
+      this.isLoggedIn = false;
+      // Optionally, redirect to login page
+      this.$router.push('/login');
+    },
+    fetchUser() {
+      // Example: Fetch user information from an API or a store
+      const user = { name: 'John Doe', loggedIn: true }; // Replace with actual API call
+      if (user) {
+        this.userName = user.name;
+        this.isLoggedIn = user.loggedIn;
+      }
+    }
+  },
+  created() {
+    this.fetchUser();
   }
 };
 </script>
@@ -79,6 +102,6 @@ export default {
   width: 50%;
 }
 .navbar-text {
-  margin-right: 1rem; /* 可根據需要調整間距 */
+  margin-right: 1rem;
 }
 </style>

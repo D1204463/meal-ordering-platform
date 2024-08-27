@@ -8,7 +8,6 @@
       <button @click="selectedPage = 'login'">Login</button>
       <button @click="selectedPage = 'register'">Register</button>
       <button @click="selectedPage = 'Delivery'">Delivery</button>
-      <button @click="selectedPage = 'Menu'">Menu</button>
     </div>
 
     <div v-if="selectedPage === 'home'">
@@ -16,7 +15,7 @@
       <p>Explore our menu and order your favorite meals!</p>
     </div>
 
-    <RestaurantPage v-if="selectedPage === 'Restaurant'" />
+    <RestaurantPage v-if="selectedPage === 'RestaurantPage'" />
     <CartPage v-if="selectedPage === 'cart'" />
     <SettingsPage v-if="selectedPage === 'settings'" />
 <login-page v-if="selectedPage === 'login'" />
