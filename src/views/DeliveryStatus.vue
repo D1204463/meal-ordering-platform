@@ -18,10 +18,10 @@
 </template>
 
 <script>
-
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 export default {
-
   data() {
     return {
       estimatedArrivalTime: 'TBD', // Replace with actual data
@@ -29,7 +29,10 @@ export default {
       statuses: ['取貨中', '運送中', '已抵達', '送餐完畢'],
       currentStatusIndex: 0,
       deliveryTime: null, // To store the estimated delivery time
-      remainingTime: 'Calculating...' // Default value
+      remainingTime: 'Calculating...', // Default value
+      map: null, // Leaflet map instance
+      marker: null, // Leaflet marker instance
+      yourLocation: [24.179362080353094, 120.64652569999998] // Replace with actual coordinates
     };
   },
   created() {
@@ -40,6 +43,12 @@ export default {
   beforeUnmount() {
     this.stopStatusUpdates();
     this.stopTimeUpdate();
+    if (this.map) {
+      this.map.remove();
+    }
+  },
+  mounted() {
+    this.initializeMap();
   },
   methods: {
     startStatusUpdates() {
@@ -87,6 +96,25 @@ export default {
       if (confirm('Are you sure you want to confirm delivery?')) {
         this.$router.push('/'); // Redirect to Home.vue
       }
+    },
+    initializeMap() {
+      this.map = L.map('map').setView(this.yourLocation, 15); // Set to your location
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(this.map);
+
+      // Add a marker with a label
+      L.marker(this.yourLocation, {
+        icon: L.icon({
+          iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+          shadowSize: [41, 41]
+        })
+      }).addTo(this.map).bindPopup('Your Location').openPopup();
     }
   }
 };
@@ -137,5 +165,4 @@ export default {
 .confirm-button:hover {
   background-color: #218838;
 }
-
 </style>

@@ -1,25 +1,17 @@
-// src/services/cartService.js
+// cartService.js
 export default {
-    cartItems: [],
-
+    getCartItems() {
+        // 確保這裡能正確讀取存儲中的購物車項目
+        return JSON.parse(localStorage.getItem('cartItems')) || [];
+    },
     addToCart(item) {
-        const existingItem = this.cartItems.find(cartItem => cartItem.id === item.id);
+        const cartItems = this.getCartItems();
+        const existingItem = cartItems.find(cartItem => cartItem.item === item.item);
         if (existingItem) {
             existingItem.quantity += item.quantity;
         } else {
-            this.cartItems.push(item);
+            cartItems.push(item);
         }
-    },
-
-    removeFromCart(itemId) {
-        this.cartItems = this.cartItems.filter(item => item.id !== itemId);
-    },
-
-    getCartItems() {
-        return this.cartItems;
-    },
-
-    calculateTotal() {
-        return this.cartItems.reduce((total, item) => total + (parseFloat(item.price.replace('$', '')) * item.quantity), 0);
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }
 };
