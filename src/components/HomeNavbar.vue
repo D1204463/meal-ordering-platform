@@ -67,6 +67,12 @@ export default {
     };
   },
   methods: {
+    changeLocation() {
+      const newLocation = prompt('請輸入新的位置：', this.location);
+      if (newLocation !== null && newLocation.trim() !== '') {
+        this.location = newLocation.trim();
+      }
+    },
     updateLocation(newAddress) {
       this.location = newAddress;
     },
@@ -84,14 +90,7 @@ export default {
         this.userName = user.name;
         this.isLoggedIn = user.loggedIn;
       }
-    },
-    changeLocation() {
-      const newLocation = prompt('請輸入新的位置：', this.location);
-      if (newLocation !== null && newLocation.trim() !== '') {
-        this.location = newLocation.trim();
-      }
     }
-
   },
   created() {
     this.fetchUser();
