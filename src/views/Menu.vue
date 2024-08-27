@@ -33,9 +33,26 @@
         </div>
       </div>
     </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <!-- Banner at the top -->
+      <div class="banner">
+        <h1>Our Menu</h1>
+      </div>
+
+      <!-- Card layout for menu items -->
+      <div class="menu-grid">
+        <div v-for="item in menuItems" :key="item.item" class="menu-card">
+          <h2>{{ item.item }}</h2>
+          <p>Price: {{ item.price }}</p>
+          <button @click="addToCart(item)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
 import cartService from '@/services/cartService';
 import {menu_data} from '@/fake_data/data.js';
@@ -68,23 +85,15 @@ export default {
       }
     },
     fetchCartItems() {
-      try {
-        console.log('Fetching cart items');
-        this.cartItems = cartService.getCartItems();
-        console.log('Cart items:', this.cartItems);
-      } catch (error) {
-        console.error('Error fetching cart items:', error);
-      }
+      console.log('Fetching cart items');
+      this.cartItems = cartService.getCartItems();
+      console.log('Cart items:', this.cartItems);
     },
     addToCart(item) {
-      try {
-        console.log('Adding to cart:', item);
-        cartService.addToCart({...item, quantity: 1});
-        this.fetchCartItems(); // Refresh the cart items after adding
-        console.log('Added to cart:', item.item);
-      } catch (error) {
-        console.error('Error adding to cart:', error);
-      }
+      console.log('Adding to cart:', item);
+      cartService.addToCart({ ...item, quantity: 1 });
+      this.fetchCartItems(); // Refresh the cart items after adding
+      console.log('Added to cart:', item.item);
     }
   }
 };

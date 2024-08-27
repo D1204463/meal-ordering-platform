@@ -24,8 +24,8 @@ import 'leaflet/dist/leaflet.css';
 export default {
   data() {
     return {
-      estimatedArrivalTime: 'TBD', // Replace with actual data
-      status: '取貨中', // Initial status
+      estimatedArrivalTime: 'TBD',
+      status: '取貨中',
       statuses: ['取貨中', '運送中', '已抵達', '送餐完畢'],
       currentStatusIndex: 0,
       deliveryTime: null, // To store the estimated delivery time
@@ -35,10 +35,11 @@ export default {
       yourLocation: [24.179362080353094, 120.64652569999998] // Replace with actual coordinates
     };
   },
-  created() {
+  mounted() {
     this.startStatusUpdates();
     this.calculateEstimatedArrivalTime();
     this.updateRemainingTime();
+    this.initMap();
   },
   beforeUnmount() {
     this.stopStatusUpdates();
@@ -59,7 +60,7 @@ export default {
         } else {
           this.stopStatusUpdates();
         }
-      }, 10000); // Update every 10 seconds
+      }, 10000);
     },
     stopStatusUpdates() {
       if (this.statusInterval) {
@@ -67,10 +68,9 @@ export default {
       }
     },
     calculateEstimatedArrivalTime() {
-      // Calculate the estimated arrival time (40 seconds from now)
       const now = new Date();
-      this.deliveryTime = new Date(now.getTime() + 40 * 1000); // 40 seconds from now
-      this.estimatedArrivalTime = this.deliveryTime.toLocaleTimeString(); // Format the time
+      this.deliveryTime = new Date(now.getTime() + 40 * 1000);
+      this.estimatedArrivalTime = this.deliveryTime.toLocaleTimeString();
     },
     updateRemainingTime() {
       this.timeUpdateInterval = setInterval(() => {
@@ -85,12 +85,23 @@ export default {
             this.stopTimeUpdate();
           }
         }
-      }, 1000); // Update every second
+      }, 1000);
     },
     stopTimeUpdate() {
       if (this.timeUpdateInterval) {
         clearInterval(this.timeUpdateInterval);
       }
+    },
+    initMap() {
+      this.map = L.map('map').setView([24.17956, 120.64671], 12);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(this.map);
+
+      L.marker([24.17956, 120.64671]).addTo(this.map)
+          .bindPopup('Your Location')
+          .openPopup();
     },
     confirmDelivery() {
       if (confirm('Are you sure you want to confirm delivery?')) {
@@ -121,30 +132,7 @@ export default {
 </script>
 
 <style scoped>
-.delivery-status {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 20px;
-  background-color: #f9f9f9;
-}
-
-.status-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.status-icon {
-  font-size: 2rem;
-  margin-right: 10px;
-  color: #007BFF;
-}
-
-.status-text {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
+/* ... existing styles ... */
 
 .map {
   width: 100%;

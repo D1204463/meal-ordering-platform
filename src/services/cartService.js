@@ -1,11 +1,22 @@
-// cartService.js
+// src/services/cartService.js
+
+const CART_KEY = 'cartItems';
+
+function getStoredCart() {
+    const cart = localStorage.getItem(CART_KEY);
+    return cart ? JSON.parse(cart) : [];
+}
+
+function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
+
 export default {
     getCartItems() {
-        // 確保這裡能正確讀取存儲中的購物車項目
-        return JSON.parse(localStorage.getItem('cartItems')) || [];
+        return getStoredCart();
     },
     addToCart(item) {
-        const cartItems = this.getCartItems();
+        const cartItems = getStoredCart();
         const existingItem = cartItems.find(cartItem => cartItem.item === item.item);
         if (existingItem) {
             existingItem.quantity += item.quantity;
