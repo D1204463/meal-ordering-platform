@@ -22,9 +22,10 @@
         </ul>
         <div class="navbar-content-A">
           <div class="d-flex">
-            <button class="btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#addressModal">
-              位置 {{ location }}
-            </button>
+            <div class="location me-3">
+              <span>位置 {{ location }}</span>
+              <button class="btn btn-outline-secondary ms-2" @click="changeLocation">更改位置</button>
+            </div>
             <span class="navbar-text ms-auto">
               {{ userName || 'Guest' }}
             </span>
@@ -66,6 +67,12 @@ export default {
     };
   },
   methods: {
+    changeLocation() {
+      const newLocation = prompt('請輸入新的位置：', this.location);
+      if (newLocation !== null && newLocation.trim() !== '') {
+        this.location = newLocation.trim();
+      }
+    },
     updateLocation(newAddress) {
       this.location = newAddress;
     },
