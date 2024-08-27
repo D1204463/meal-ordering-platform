@@ -34,7 +34,7 @@
           <div class="d-flex">
             <div class="location me-3">
               <span>位置 {{ location }}</span>
-              <button class="btn btn-outline-secondary ms-2">更改位置</button>
+              <button class="btn btn-outline-secondary ms-2" @click="changeLocation">更改位置</button>
             </div>
             <span class="navbar-text ms-auto">
               Guest
@@ -64,6 +64,14 @@ export default {
     return {
       location: '當前位置'
     };
+  },
+  methods: {
+    changeLocation() {
+      const newLocation = prompt('請輸入新的位置：', this.location);
+      if (newLocation !== null && newLocation.trim() !== '') {
+        this.location = newLocation.trim();
+      }
+    }
   }
 };
 </script>
