@@ -8,6 +8,13 @@
           {{ item.item }} - {{ item.quantity }} x {{ item.price }}
         </li>
       </ul>
+      <!-- Add Total and Button to Navigate to Cart.vue -->
+      <div class="cart-summary">
+        <p>Total: ${{ total.toFixed(2) }}</p>
+        <router-link to="/cart">
+          <button class="go-to-cart-button">Go to Cart</button>
+        </router-link>
+      </div>
     </div>
 
     <!-- Main Content Area -->
@@ -28,9 +35,10 @@
     </div>
   </div>
 </template>
+
 <script>
 import cartService from '@/services/cartService';
-import { menu_data } from '@/fake_data/data.js';
+import {menu_data} from '@/fake_data/data.js';
 
 export default {
   name: 'MenuPage',
@@ -39,6 +47,11 @@ export default {
       menuItems: [],
       cartItems: [],  // Data property to hold cart items
     };
+  },
+  computed: {
+    total() {
+      return this.cartItems.reduce((sum, item) => sum + item.quantity * item.price, 0);
+    }
   },
   created() {
     this.fetchMenuItems();
@@ -57,7 +70,7 @@ export default {
     },
     addToCart(item) {
       console.log('Adding to cart:', item);
-      cartService.addToCart({ ...item, quantity: 1 });
+      cartService.addToCart({...item, quantity: 1});
       this.fetchCartItems(); // Refresh the cart items after adding
       console.log('Added to cart:', item.item);
     }
@@ -102,16 +115,29 @@ export default {
   text-align: center;
 }
 
-.cart-button {
+.cart-summary {
+  margin-top: 20px;
+}
+
+.cart-summary p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.go-to-cart-button {
   display: block;
   margin: 20px auto;
   padding: 10px 20px;
   font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.cart-list {
-  margin-top: 20px;
-  border-top: 1px solid #ccc;
-  padding-top: 20px;
+.go-to-cart-button:hover {
+  background-color: #0056b3;
 }
 </style>
