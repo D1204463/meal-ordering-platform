@@ -6,7 +6,7 @@
         <router-view></router-view>
       </div>
     </div>
-    <HomeFooter :isFixed="isFixed" />
+    <HomeFooter />
   </div>
 </template>
 
@@ -14,6 +14,8 @@
 <script>
 import HomeFooter from './components/HomeFooter.vue';
 import HomeNavbar from './components/HomeNavbar.vue';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
 export default {

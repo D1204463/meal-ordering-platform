@@ -1,24 +1,33 @@
 <template>
-
   <div class="menu-page">
-    <!-- Banner at the top -->
-    <div class="banner">
-      <h1>Our Menu</h1>
+    <!-- Sidebar for Cart -->
+    <div class="sidebar">
+      <h2>Cart</h2>
+      <ul>
+        <li v-for="item in cartItems" :key="item.item">
+          {{ item.item }} - {{ item.quantity }} x {{ item.price }}
+        </li>
+      </ul>
     </div>
 
-    <!-- Card layout for menu items -->
-    <div class="menu-grid">
-      <div v-for="item in menuItems" :key="item.item" class="menu-card">
-        <h2>{{ item.item }}</h2>
-        <p>Price: {{ item.price }}</p>
-        <button @click="addToCart(item)">Add to Cart</button>
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <!-- Banner at the top -->
+      <div class="banner">
+        <h1>Our Menu</h1>
+      </div>
+
+      <!-- Card layout for menu items -->
+      <div class="menu-grid">
+        <div v-for="item in menuItems" :key="item.item" class="menu-card">
+          <h2>{{ item.item }}</h2>
+          <p>Price: {{ item.price }}</p>
+          <button @click="addToCart(item)">Add to Cart</button>
+        </div>
       </div>
     </div>
-
-
   </div>
 </template>
-
 <script>
 import cartService from '@/services/cartService';
 import { menu_data } from '@/fake_data/data.js';
@@ -27,12 +36,13 @@ export default {
   name: 'MenuPage',
   data() {
     return {
-      menuItems:[],
-     
+      menuItems: [],
+      cartItems: [],  // Data property to hold cart items
     };
   },
   created() {
     this.fetchMenuItems();
+    this.fetchCartItems();  // Fetch initial cart items
   },
   methods: {
     async fetchMenuItems() {
@@ -41,12 +51,15 @@ export default {
       this.menuItems = data;
     },
     fetchCartItems() {
+      console.log('Fetching cart items');
       this.cartItems = cartService.getCartItems();
+      console.log('Cart items:', this.cartItems);
     },
     addToCart(item) {
-      cartService.addToCart({...item, quantity: 1});
-      this.fetchCartItems(); // Update the cart list after adding
-      console.log('Added to cart:', item.name);
+      console.log('Adding to cart:', item);
+      cartService.addToCart({ ...item, quantity: 1 });
+      this.fetchCartItems(); // Refresh the cart items after adding
+      console.log('Added to cart:', item.item);
     }
   }
 };
@@ -54,8 +67,20 @@ export default {
 
 <style scoped>
 .menu-page {
-  max-width: 1000px;
-  margin: 0 auto;
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  background: #f9f9f9;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
 }
 
 .banner {
