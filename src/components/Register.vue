@@ -1,10 +1,10 @@
 <template>
   <div class="register-page">
-    <h1>User Registration</h1>
+    <h1>用戶註冊</h1>
     <form @submit.prevent="handleRegister">
-      <!-- Profile Picture -->
+      <!-- 個人頭像 -->
       <div class="form-group">
-        <label for="profilePicture">Profile Picture:</label>
+        <label for="profilePicture">個人頭像：</label>
         <input
             type="file"
             id="profilePicture"
@@ -14,9 +14,9 @@
         <div v-if="profilePictureError" class="error-feedback">{{ profilePictureError }}</div>
       </div>
 
-      <!-- Username -->
+      <!-- 使用者名稱 -->
       <div class="form-group">
-        <label for="username">Username:</label>
+        <label for="username">使用者名稱：</label>
         <input
             type="text"
             id="username"
@@ -27,9 +27,9 @@
         <div v-if="usernameError" class="error-feedback">{{ usernameError }}</div>
       </div>
 
-      <!-- Email -->
+      <!-- 電子郵件 -->
       <div class="form-group">
-        <label for="email">Email:</label>
+        <label for="email">電子郵件：</label>
         <input
             type="email"
             id="email"
@@ -40,9 +40,9 @@
         <div v-if="emailError" class="error-feedback">{{ emailError }}</div>
       </div>
 
-      <!-- Chinese Name -->
+      <!-- 中文名 -->
       <div class="form-group">
-        <label for="chineseName">Chinese Name:</label>
+        <label for="chineseName">中文名：</label>
         <input
             type="text"
             id="chineseName"
@@ -53,9 +53,9 @@
         <div v-if="chineseNameError" class="error-feedback">{{ chineseNameError }}</div>
       </div>
 
-      <!-- Address -->
+      <!-- 地址 -->
       <div class="form-group">
-        <label for="address">Address:</label>
+        <label for="address">地址：</label>
         <input
             type="text"
             id="address"
@@ -66,9 +66,9 @@
         <div v-if="addressError" class="error-feedback">{{ addressError }}</div>
       </div>
 
-      <!-- Phone Number -->
+      <!-- 電話號碼 -->
       <div class="form-group">
-        <label for="phone">Phone Number:</label>
+        <label for="phone">電話號碼：</label>
         <input
             type="tel"
             id="phone"
@@ -79,9 +79,9 @@
         <div v-if="phoneError" class="error-feedback">{{ phoneError }}</div>
       </div>
 
-      <!-- Password -->
+      <!-- 密碼 -->
       <div class="form-group">
-        <label for="password">Password:</label>
+        <label for="password">密碼：</label>
         <input
             type="password"
             id="password"
@@ -92,9 +92,9 @@
         <div v-if="passwordError" class="error-feedback">{{ passwordError }}</div>
       </div>
 
-      <!-- Confirm Password -->
+      <!-- 確認密碼 -->
       <div class="form-group">
-        <label for="confirmPassword">Confirm Password:</label>
+        <label for="confirmPassword">確認密碼：</label>
         <input
             type="password"
             id="confirmPassword"
@@ -359,7 +359,7 @@ input.is-invalid {
 }
 
 button {
-  background-color: #007bff;
+  background-color: #9d5522;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -385,7 +385,7 @@ button:disabled {
 
 .success-message {
   margin-top: 20px;
-  color: green;
+  color: #6fb06f;
   text-align: center;
 }
 
@@ -399,7 +399,7 @@ button:disabled {
   display: block;
   width: 100%;
   margin-top: 10px;
-  background-color: #28a745;
+  background-color: #39d35c;
 }
 
 .menu-button:hover {

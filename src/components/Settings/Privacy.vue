@@ -1,21 +1,23 @@
 <!-- src/components/Settings/Privacy.vue -->
 <template>
-  <div>
-    <h2>Privacy Settings</h2>
+  <div class="privacy-settings">
+    <h2>隱私設置</h2>
     <form @submit.prevent="savePrivacySettings">
-      <div>
+      <div class="form-group">
         <label>
           <input type="checkbox" v-model="dataSharing" />
-          Allow data sharing with partners
+          允許與合作夥伴共享數據
         </label>
       </div>
-      <div>
+      <div class="form-group">
         <label>
           <input type="checkbox" v-model="tracking" />
-          Enable tracking for personalized ads
+          啟用個性化廣告跟蹤
         </label>
       </div>
-      <button type="submit">Save</button>
+      <div class="form-actions">
+        <button type="submit">保存</button>
+      </div>
     </form>
   </div>
 </template>
@@ -36,9 +38,9 @@ export default {
           dataSharing: this.dataSharing,
           tracking: this.tracking
         });
-        alert('Privacy settings saved successfully.');
+        alert('隱私設置保存成功。');
       } catch (error) {
-        console.error('Failed to save privacy settings.');
+        console.error('保存隱私設置失敗。');
       }
     }
   },
@@ -46,5 +48,46 @@ export default {
 </script>
 
 <style scoped>
-/* Add styles for privacy settings */
+.privacy-settings {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.form-group input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: white;
+  background-color: #8B4513;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #a0522d;
+}
 </style>

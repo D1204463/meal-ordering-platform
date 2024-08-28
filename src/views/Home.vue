@@ -1,6 +1,17 @@
 <template>
   <div class="home-page">
-    <Carousel />
+    <!-- Remove this Carousel component -->
+    <!-- <Carousel :items-to-show="1" autoplay :autoplay-timeout="5000">
+      <template #slide>
+        <img src="path_to_image1.jpg" alt="Image 1">
+      </template>
+      <template #slide>
+        <img src="path_to_image2.jpg" alt="Image 2">
+      </template>
+      <template #slide>
+        <img src="path_to_image3.jpg" alt="Image 3">
+      </template>
+    </Carousel> -->
 
     <div class="nav-buttons">
       <button @click="selectedPage = 'home'">Home</button>
@@ -28,15 +39,14 @@
   </div>
 </template>
 
-<script>
 
+<script>
 import CartPage from "@/views/Cart.vue";
 import SettingsPage from "@/views/Settings.vue";
 import LoginPage from "@/components/UserLogin.vue";
 import RestaurantPage from "@/views/RestaurantPage.vue";
 import UserRegisterPage from "@/components/Register.vue";
 import DeliveryStatus from "@/views/DeliveryStatus.vue";
-
 
 export default {
   name: 'HomePage',
@@ -60,6 +70,17 @@ export default {
 .home-page {
   text-align: center;
   margin-top: 50px;
+}
+
+.vue-carousel {
+  margin: 20px auto;
+  width: 80%;
+  max-width: 1000px;
+}
+
+.vue-carousel img {
+  width: 100%;
+  border-radius: 8px;
 }
 
 .nav-buttons {

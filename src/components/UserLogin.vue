@@ -20,25 +20,21 @@
       </div>
 
       <button type="submit">Login</button>
-      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </form>
   </div>
   <Footer :isFixed="true" />
 </template>
 
 <script>
-
-
 export default {
   name: 'LoginPage',
   data() {
     return {
       username: '',
       password: '',
-      captchaText: '', // Will be generated in mounted
+      captchaText: '', // CAPTCHA 文本，將在 mounted 中生成
       captchaInput: '',
-      errorMessage: '',
-      captchaError: ''
+      captchaError: '' // 用於顯示 CAPTCHA 錯誤信息
     };
   },
   methods: {
@@ -56,13 +52,13 @@ export default {
     async handleLogin() {
       this.captchaError = '';
 
-      // Check CAPTCHA
+      // 驗證 CAPTCHA
       if (this.captchaInput !== this.captchaText) {
         this.captchaError = 'CAPTCHA validation failed.';
         return;
       }
 
-      // Hardcoded test credentials
+      // 硬編碼測試憑證
       const testUsername = '123';
       const testPassword = '123';
 
@@ -70,10 +66,9 @@ export default {
         console.log('Login successful');
         this.$router.push('/RestaurantPage');
       } else {
-        this.errorMessage = 'Login failed. Please check your username and password.';
+        this.captchaError = 'Login failed. Please check your username and password.';
       }
     }
-
   },
   mounted() {
     this.generateCaptcha();
@@ -109,8 +104,7 @@ label {
 }
 
 input[type="text"],
-input[type="password"],
-input[type="submit"] {
+input[type="password"] {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
@@ -120,7 +114,7 @@ input[type="submit"] {
 }
 
 button[type="submit"] {
-  background-color: #007bff;
+  background-color: #8B4513; /* 使用深橙色 */
   color: white;
   font-weight: bold;
   border: none;
@@ -132,7 +126,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #0056b3;
+  background-color: #6A2E12; /* 深橙色的深色變體 */
 }
 
 .error-message {
@@ -141,17 +135,18 @@ button[type="submit"]:hover {
 
 .mock-captcha {
   margin: 10px 0;
+  text-align: center; /* 讓元素居中 */
 }
 
 .captcha-text {
   font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 5px; /* 縮小間距 */
   border: 1px solid #ccc;
   padding: 5px;
   background-color: #f9f9f9;
   text-align: center;
-  width: 100px;
-  margin: 0 auto 10px auto;
+  width: 80px; /* 縮小背景框大小 */
+  margin: 0 auto 5px auto; /* 調整上下間距 */
 }
 </style>
