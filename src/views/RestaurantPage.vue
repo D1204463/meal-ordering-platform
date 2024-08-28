@@ -23,7 +23,7 @@
             class="card"
             @click="goToMenu(card.id)"
         >
-          <img :src="getRandomImageUrl()" alt="Card Image" class="card-image" />
+          <img :src="getImage(card.type)" alt="Card Image" class="card-image" />
           <div class="card-info">
             <h3>{{ card.title }}</h3>
             <p>{{ card.description }}</p>
@@ -60,11 +60,24 @@ export default {
     filterByType(type) {
       this.selectedType = type;
     },
-    getRandomImageUrl() {
-      // Generate a random size for variety, e.g., 200 to 400px in width and height
-      const width = Math.floor(Math.random() * 200) + 200; // random width between 200 and 400px
-      const height = Math.floor(Math.random() * 200) + 200; // random height between 200 and 400px
-      return `https://picsum.photos/${width}/${height}`;
+    getImage(type) {
+      let img = "";
+
+      if(type==='Chinese'){
+        img = 'img/Chinese.jpg'
+      }else if(type === 'Italian'){
+        img = 'img/Italy.jpg'
+      }else if(type === 'Mexican'){
+        img = 'img/Mexico.jpg'
+      }else if(type === 'Japanese'){
+        img = 'img/Japan.jpg'
+      }else if(type === 'Indian'){
+        img = 'img/India.jpg'
+      }else{
+        img = 'img/Korea.jpg'
+      }
+  
+      return img;
     }
   }
 };

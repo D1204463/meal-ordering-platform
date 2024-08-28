@@ -1,5 +1,5 @@
 export const restaurant_data =[
-  { id: 1, image: 'path/to/image1.jpg', title: '羅馬風情', description: '正宗意大利美食，品味地道披薩和手工意大利面', type: 'Italian' },
+  { id: 1, image: '/img/Italy.jpg', title: '羅馬風情', description: '正宗意大利美食，品味地道披薩和手工意大利面', type: 'Italian' },
   { id: 2, image: 'path/to/image2.jpg', title: '江南小館', description: '精緻江南菜，融合傳統與創新的中華美食', type: 'Chinese' },
   { id: 3, image: 'path/to/image3.jpg', title: '墨西哥陽光', description: '熱情洋溢的墨西哥風味，香辣夾餅和玉米餅', type: 'Mexican' },
   { id: 4, image: 'path/to/image4.jpg', title: '櫻花壽司', description: '精緻日本料理，新鮮刺身和創意卷物', type: 'Japanese' },
