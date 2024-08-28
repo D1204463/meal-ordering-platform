@@ -39,7 +39,6 @@ export default {
     this.startStatusUpdates();
     this.calculateEstimatedArrivalTime();
     this.updateRemainingTime();
-    this.initMap();
     this.initializeMap();
   },
   beforeUnmount() {
