@@ -23,7 +23,7 @@
             class="card"
             @click="goToMenu(card.id)"
         >
-          <img :src="getImage(card.type)" alt="Card Image" class="card-image" />
+          <img :src="publicpath+ getImage(card.type)" alt="Card Image" class="card-image" />
           <div class="card-info">
             <h3>{{ card.title }}</h3>
             <p>{{ card.description }}</p>
@@ -43,6 +43,7 @@ export default {
     return {
       selectedType: 'All',
       types: ['All', 'Italian', 'Chinese', 'Mexican', 'Japanese', 'Indian', 'Korean'],
+      publicpath: process.env.BASE_URL
     };
   },
   computed: {

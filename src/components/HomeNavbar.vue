@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/">
-        <img src="/img/web_logo.jpg" alt="Logo" class="logo">
+        <img :src="logo" alt="Logo" class="logo">
       </router-link>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -53,6 +53,7 @@
 
 <script>
 import AddressModal from './AddressModal.vue';
+import logo from '@/assets/logo.jpg'
 
 export default {
   name: 'NavBar',
@@ -63,7 +64,8 @@ export default {
     return {
       location: '當前位置',
       userName: '',
-      isLoggedIn: false
+      isLoggedIn: false,
+      logo: logo
     };
   },
   methods: {
