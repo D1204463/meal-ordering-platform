@@ -39,7 +39,8 @@ export default {
     this.startStatusUpdates();
     this.calculateEstimatedArrivalTime();
     this.updateRemainingTime();
-    this.initializeMap(); // 初始化地圖
+    this.initMap();
+    this.initializeMap();
   },
   beforeUnmount() {
     this.stopStatusUpdates();
