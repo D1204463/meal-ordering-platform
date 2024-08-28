@@ -33,7 +33,6 @@
         </div>
       </div>
     </div>
-    </div>
 
     <!-- Main Content Area -->
     <div class="main-content">
