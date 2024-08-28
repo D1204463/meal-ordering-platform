@@ -53,6 +53,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import cartService from '@/services/cartService';
 import {menu_data} from '@/fake_data/data.js';
@@ -91,7 +92,7 @@ export default {
     },
     addToCart(item) {
       console.log('Adding to cart:', item);
-      cartService.addToCart({ ...item, quantity: 1 });
+      cartService.addToCart({...item, quantity: 1});
       this.fetchCartItems(); // Refresh the cart items after adding
       console.log('Added to cart:', item.item);
     }
