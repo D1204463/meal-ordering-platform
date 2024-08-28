@@ -51,7 +51,8 @@
         </div>
       </div>
     </div>
-  </div>
+
+
 </template>
 <script>
 import cartService from '@/services/cartService';

@@ -39,7 +39,7 @@ export default {
     this.startStatusUpdates();
     this.calculateEstimatedArrivalTime();
     this.updateRemainingTime();
-    this.initMap();
+    this.initializeMap(); // Merged this call from the other mounted hook
   },
   beforeUnmount() {
     this.stopStatusUpdates();
@@ -47,9 +47,6 @@ export default {
     if (this.map) {
       this.map.remove();
     }
-  },
-  mounted() {
-    this.initializeMap();
   },
   methods: {
     startStatusUpdates() {
@@ -92,22 +89,6 @@ export default {
         clearInterval(this.timeUpdateInterval);
       }
     },
-    initMap() {
-      this.map = L.map('map').setView([24.17956, 120.64671], 12);
-
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-      }).addTo(this.map);
-
-      L.marker([24.17956, 120.64671]).addTo(this.map)
-          .bindPopup('Your Location')
-          .openPopup();
-    },
-    confirmDelivery() {
-      if (confirm('Are you sure you want to confirm delivery?')) {
-        this.$router.push('/'); // Redirect to Home.vue
-      }
-    },
     initializeMap() {
       this.map = L.map('map').setView(this.yourLocation, 15); // Set to your location
 
@@ -126,10 +107,16 @@ export default {
           shadowSize: [41, 41]
         })
       }).addTo(this.map).bindPopup('Your Location').openPopup();
+    },
+    confirmDelivery() {
+      if (confirm('Are you sure you want to confirm delivery?')) {
+        this.$router.push('/'); // Redirect to Home.vue
+      }
     }
   }
 };
 </script>
+
 
 <style scoped>
 /* ... existing styles ... */
