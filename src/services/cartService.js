@@ -23,6 +23,6 @@ export default {
         } else {
             cartItems.push(item);
         }
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        saveCart(cartItems); // Use saveCart function here
     }
 };

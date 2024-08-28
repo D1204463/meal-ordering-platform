@@ -35,7 +35,7 @@
       </div>
       <div v-else class="empty-cart">
         <p>Your cart is empty.</p>
-        <img src="path/to/empty-cart-image.png" alt="Empty Cart" class="empty-cart-image" />
+        <img src="https://picsum.photos/200/200?random=1" alt="Empty Cart" class="empty-cart-image" />
       </div>
       <CheckoutModal :show="showModal" @select="handlePaymentMethod" @close="closeCheckoutModal" />
     </main>
@@ -46,7 +46,6 @@
 
 <script>
 import CheckoutModal from '@/components/CheckoutModal.vue';
-
 
 export default {
   name: 'CartPage',
@@ -114,19 +113,6 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-.nav-links li {
-  display: inline;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-}
-
-.nav-links a:hover {
-  text-decoration: underline;
 }
 
 .content {
@@ -233,5 +219,4 @@ button:hover {
   width: 200px;
   margin-top: 20px;
 }
-
 </style>

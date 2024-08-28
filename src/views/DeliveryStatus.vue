@@ -1,7 +1,7 @@
 <template>
   <div class="delivery-status">
-    <h1>Delivery Status</h1>
-    <!-- Status Icons -->
+    <h1>配送狀態</h1>
+    <!-- 狀態圖示 -->
     <div class="status-container">
       <i v-if="status === '取貨中'" class="status-icon fas fa-box"></i>
       <i v-if="status === '運送中'" class="status-icon fas fa-truck"></i>
@@ -10,9 +10,9 @@
       <p class="status-text">{{ status }}</p>
     </div>
     <div id="map" class="map"></div>
-    <p>Estimated Arrival Time: {{ estimatedArrivalTime }}</p>
-    <p>Remaining Time: {{ remainingTime }}</p>
-    <button @click="confirmDelivery" class="confirm-button">Confirm Delivery</button>
+    <p>預計抵達時間: {{ estimatedArrivalTime }}</p>
+    <p>剩餘時間: {{ remainingTime }}</p>
+    <button @click="confirmDelivery" class="confirm-button">確認送達</button>
   </div>
   <Footer :isFixed="true" />
 </template>
@@ -28,11 +28,11 @@ export default {
       status: '取貨中',
       statuses: ['取貨中', '運送中', '已抵達', '送餐完畢'],
       currentStatusIndex: 0,
-      deliveryTime: null, // To store the estimated delivery time
-      remainingTime: 'Calculating...', // Default value
-      map: null, // Leaflet map instance
-      marker: null, // Leaflet marker instance
-      yourLocation: [24.179362080353094, 120.64652569999998] // Replace with actual coordinates
+      deliveryTime: null, // 儲存預計送達時間
+      remainingTime: '計算中...', // 預設值
+      map: null, // Leaflet 地圖實例
+      marker: null, // Leaflet 標記實例
+      yourLocation: [24.179362080353094, 120.64652569999998] // 替換為實際座標
     };
   },
   mounted() {
@@ -77,9 +77,9 @@ export default {
           const timeDiff = this.deliveryTime - now;
           if (timeDiff > 0) {
             const seconds = Math.floor(timeDiff / 1000);
-            this.remainingTime = `${seconds}s`;
+            this.remainingTime = `${seconds} 秒`;
           } else {
-            this.remainingTime = 'Delivered';
+            this.remainingTime = '已送達';
             this.stopTimeUpdate();
           }
         }
@@ -90,30 +90,14 @@ export default {
         clearInterval(this.timeUpdateInterval);
       }
     },
-    initMap() {
-      this.map = L.map('map').setView([24.17956, 120.64671], 12);
-
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-      }).addTo(this.map);
-
-      L.marker([24.17956, 120.64671]).addTo(this.map)
-          .bindPopup('Your Location')
-          .openPopup();
-    },
-    confirmDelivery() {
-      if (confirm('Are you sure you want to confirm delivery?')) {
-        this.$router.push('/'); // Redirect to Home.vue
-      }
-    },
     initializeMap() {
-      this.map = L.map('map').setView(this.yourLocation, 15); // Set to your location
+      this.map = L.map('map').setView(this.yourLocation, 15); // 設定為你的位置
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> 版權所有'
       }).addTo(this.map);
 
-      // Add a marker with a label
+      // 添加標記和標籤
       L.marker(this.yourLocation, {
         icon: L.icon({
           iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
@@ -123,14 +107,30 @@ export default {
           shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
           shadowSize: [41, 41]
         })
-      }).addTo(this.map).bindPopup('Your Location').openPopup();
+      }).addTo(this.map).bindPopup('你的位置').openPopup();
+    },
+    confirmDelivery() {
+      if (confirm('你確定要確認送達嗎？')) {
+        this.$router.push('/'); // 重定向到 Home.vue
+      }
     }
   }
 };
 </script>
 
 <style scoped>
-/* ... existing styles ... */
+/* 強調配送狀態的字體 */
+.status-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.status-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #d9534f;
+  margin-top: 10px;
+}
 
 .map {
   width: 100%;

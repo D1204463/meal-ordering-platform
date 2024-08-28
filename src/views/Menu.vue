@@ -34,23 +34,9 @@
       </div>
     </div>
 
-    <!-- Main Content Area -->
-    <div class="main-content">
-      <!-- Banner at the top -->
-      <div class="banner">
-        <h1>Our Menu</h1>
-      </div>
 
-      <!-- Card layout for menu items -->
-      <div class="menu-grid">
-        <div v-for="item in menuItems" :key="item.item" class="menu-card">
-          <h2>{{ item.item }}</h2>
-          <p>Price: {{ item.price }}</p>
-          <button @click="addToCart(item)">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
+
 </template>
 
 <script>
