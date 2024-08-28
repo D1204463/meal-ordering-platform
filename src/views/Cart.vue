@@ -35,7 +35,7 @@
       </div>
       <div v-else class="empty-cart">
         <p>Your cart is empty.</p>
-        <img src="path/to/empty-cart-image.png" alt="Empty Cart" class="empty-cart-image" />
+        <img src="https://picsum.photos/200/200?random=1" alt="Empty Cart" class="empty-cart-image" />
       </div>
       <CheckoutModal :show="showModal" @select="handlePaymentMethod" @close="closeCheckoutModal" />
     </main>
@@ -46,7 +46,6 @@
 
 <script>
 import CheckoutModal from '@/components/CheckoutModal.vue';
-
 
 export default {
   name: 'CartPage',
@@ -68,9 +67,9 @@ export default {
   methods: {
     generateMockCartItems() {
       return [
-        { id: 1, name: 'Item 1', price: 10.00, quantity: 2, description: 'This is a great item.', image: 'path/to/image1.jpg' },
-        { id: 2, name: 'Item 2', price: 20.00, quantity: 1, description: 'This item is even better!', image: 'path/to/image2.jpg' },
-        { id: 3, name: 'Item 3', price: 5.50, quantity: 4, description: 'An affordable choice.', image: 'path/to/image3.jpg' },
+        { id: 1, name: 'Item 1', price: 10.00, quantity: 2, description: 'This is a great item.', image: 'https://picsum.photos/100/100?random=2' },
+        { id: 2, name: 'Item 2', price: 20.00, quantity: 1, description: 'This item is even better!', image: 'https://picsum.photos/100/100?random=3' },
+        { id: 3, name: 'Item 3', price: 5.50, quantity: 4, description: 'An affordable choice.', image: 'https://picsum.photos/100/100?random=4' },
       ];
     },
     removeFromCart(itemId) {
@@ -114,19 +113,6 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-.nav-links li {
-  display: inline;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-}
-
-.nav-links a:hover {
-  text-decoration: underline;
 }
 
 .content {
@@ -233,5 +219,4 @@ button:hover {
   width: 200px;
   margin-top: 20px;
 }
-
 </style>
