@@ -87,7 +87,7 @@ export default {
 }
 
 .sidebar li.active, .sidebar li:hover {
-  background-color: #007BFF;
+  background-color: #adaaaa;
   color: white;
 }
 

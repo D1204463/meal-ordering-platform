@@ -133,7 +133,7 @@ export default {
 }
 
 .btn:hover {
-  background-color: 8d99ae; /* 浅灰色作為懸停效果 */
+  background-color: #8d99ae; /* 浅灰色作為懸停效果 */
   border-color: #EAEAEA;
   color: #000;
 }
