@@ -5,7 +5,12 @@
       <div class="sidebar">
         <h3>Filter by Type</h3>
         <ul>
-          <li v-for="type in types" :key="type" @click="filterByType(type)">
+          <li
+              v-for="type in types"
+              :key="type"
+              @click="filterByType(type)"
+              :class="{ active: selectedType === type }"
+          >
             {{ type }}
           </li>
         </ul>
@@ -18,7 +23,7 @@
             class="card"
             @click="goToMenu(card.id)"
         >
-          <!-- <img :src="card.image" alt="Card Image" class="card-image" /> -->
+          <img :src="getRandomImageUrl()" alt="Card Image" class="card-image" />
           <div class="card-info">
             <h3>{{ card.title }}</h3>
             <p>{{ card.description }}</p>
@@ -37,23 +42,16 @@ export default {
   data() {
     return {
       selectedType: 'All',
-      types: ['All', 'Italian', 'Chinese', 'Mexican', 'Japanese', 'Indian', 'Korean']
+      types: ['All', 'Italian', 'Chinese', 'Mexican', 'Japanese', 'Indian', 'Korean'],
     };
   },
   computed: {
     filteredCards() {
-      const data = restaurant_data;
       if (this.selectedType === 'All') {
-        return data;
+        return restaurant_data;
       }
-      let filtered_data = [];
-      data.forEach(element => {
-        if(element.type === this.selectedType){
-          filtered_data.push(element)
-        }
-      });
-      return filtered_data;
-    }
+      return restaurant_data.filter(card => card.type === this.selectedType);
+    },
   },
   methods: {
     goToMenu(menuId) {
@@ -61,6 +59,12 @@ export default {
     },
     filterByType(type) {
       this.selectedType = type;
+    },
+    getRandomImageUrl() {
+      // Generate a random size for variety, e.g., 200 to 400px in width and height
+      const width = Math.floor(Math.random() * 200) + 200; // random width between 200 and 400px
+      const height = Math.floor(Math.random() * 200) + 200; // random height between 200 and 400px
+      return `https://picsum.photos/${width}/${height}`;
     }
   }
 };
@@ -93,10 +97,13 @@ export default {
   cursor: pointer;
   padding: 10px;
   border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
 }
 
-.sidebar li:hover {
+.sidebar li:hover,
+.sidebar li.active {
   background-color: #f0f0f0;
+  font-weight: bold; /* Active item becomes bold */
 }
 
 .card-container {
@@ -123,7 +130,9 @@ export default {
 
 .card-image {
   width: 100%;
-  height: auto;
+  height: 200px; /* Set a fixed height for the image */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+  border-bottom: 1px solid #ddd;
 }
 
 .card-info {
