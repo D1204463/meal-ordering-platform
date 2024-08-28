@@ -22,9 +22,10 @@
         </ul>
         <div class="navbar-content-A">
           <div class="d-flex">
-            <button class="btn btn-outline-secondary me-3" data-bs-toggle="modal" data-bs-target="#addressModal">
-              位置 {{ location }}
-            </button>
+            <div class="location me-3">
+              <span>位置 {{ location }}</span>
+              <button class="btn btn-outline-secondary ms-2" @click="changeLocation">更改位置</button>
+            </div>
             <span class="navbar-text ms-auto">
               {{ userName || 'Guest' }}
             </span>
@@ -66,6 +67,12 @@ export default {
     };
   },
   methods: {
+    changeLocation() {
+      const newLocation = prompt('請輸入新的位置：', this.location);
+      if (newLocation !== null && newLocation.trim() !== '') {
+        this.location = newLocation.trim();
+      }
+    },
     updateLocation(newAddress) {
       this.location = newAddress;
     },
@@ -95,13 +102,49 @@ export default {
 .logo {
   width: 80px;
 }
+
 .navbar-content-A {
   width: 50%;
 }
+
 .navbar-content-B {
   width: 50%;
 }
+
 .navbar-text {
-  margin-right: 1rem;
+  margin-right: 1rem; /* 可根据需要调整间距 */
+}
+
+.navbar.navbar-expand-lg {
+  background-color: #f8650b !important; /* 沙棕色，模擬木材的顏色 */
+}
+
+.btn {
+  background-color: #ffc55d; /* 象牙白 */
+
+  color: #210b2c; /* 字體顏色設為黑色 */
+}
+
+.btn:hover {
+  background-color: 8d99ae; /* 浅灰色作為懸停效果 */
+  border-color: #EAEAEA;
+  color: #000;
+}
+.user-actions .btn {
+  color: #210b2c; /* 按鈕文字顏色 */
+  text-decoration: none; /* 移除底線 */
+}
+
+.user-actions .btn:hover {
+  color: #000; /* 懸停時文字顏色 */
+}
+/* 移除 router-link 的藍色底線 */
+.navbar-content-A .nav-link {
+  color: #210b2c; /* 文字顏色 */
+  text-decoration: none; /* 移除底線 */
+}
+
+.navbar-content-A .nav-link:hover {
+  color: #000; /* 懸停時文字顏色 */
 }
 </style>

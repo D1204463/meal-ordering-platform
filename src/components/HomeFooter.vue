@@ -1,5 +1,5 @@
 <template>
-  <footer :class="['footer-banner', { fixed: isFixed }]">
+  <footer :class="['footer-banner']">
     <p>&copy; 2024 Meal Ordering Platform. All rights reserved.</p>
   </footer>
 </template>
@@ -19,8 +19,9 @@ export default {
 .footer-banner {
   margin-top: 20px;
   padding: 10px;
-  background-color: #f1f1f1;
+  background-color: #f8650b; /* 深橙色背景 */
   text-align: center;
+  color: white; /* 可選：文字顏色設為白色，增加對比 */
 }
 
 .fixed {
