@@ -83,12 +83,19 @@ export default {
       // Optionally, redirect to login page
       this.$router.push('/login');
     },
-    fetchUser() {
-      // Example: Fetch user information from an API or a store
-      const user = { name: 'John Doe', loggedIn: true }; // Replace with actual API call
-      if (user) {
-        this.userName = user.name;
-        this.isLoggedIn = user.loggedIn;
+    async fetchUser() {
+      try {
+        // Simulate API call
+        const response = await fetch('/api/user'); // Replace with your actual API endpoint
+        if (response.ok) {
+          const user = await response.json();
+          this.userName = user.name;
+          this.isLoggedIn = user.loggedIn;
+        } else {
+          console.error('Failed to fetch user data');
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
       }
     }
   },
