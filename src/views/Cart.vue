@@ -4,7 +4,7 @@
       <h1>{{ userName }}'s Cart</h1>
       <div v-if="cartItems.length">
         <div v-for="item in cartItems" :key="item.id" class="cart-item">
-          <img :src="item.image" alt="Product Image" class="item-image" />
+          <img :src="publicpath+ item.image" alt="Product Image" class="item-image" />
           <div class="item-details">
             <h2>{{ item.name }}</h2>
             <p class="description">{{ item.description }}</p>
@@ -56,7 +56,8 @@ export default {
     return {
       cartItems: this.generateMockCartItems(),
       showModal: false,
-      userName: 'John Doe' // Mock user name
+      userName: 'ohn Doe', // Mock user name
+      publicpath: process.env.BASE_URL
     };
   },
   computed: {
