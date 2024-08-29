@@ -56,7 +56,7 @@ export default {
     return {
       cartItems: this.generateMockCartItems(),
       showModal: false,
-      userName: 'ohn Doe', // Mock user name
+      userName: 'John Doe', // Mock user name
       publicpath: process.env.BASE_URL
     };
   },
